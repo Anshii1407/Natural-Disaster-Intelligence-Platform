@@ -1,0 +1,41 @@
+﻿# Environment Variables & Secrets
+.env
+.env.local
+.env.*
+*.env
+!.env.example
+
+# Dependencies
+node_modules/
+package-lock.json.bak
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Python & AI Service
+venv/
+env/
+ENV/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Logs & Runtime
+logs/
+*.log
+npm-debug.log*
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
