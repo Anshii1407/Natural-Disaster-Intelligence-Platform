@@ -1,1 +1,24 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
+
+@theme {
+  --color-navy-base: #0B1728;
+  --color-navy-surface: #10233F;
+  --color-navy-elevated: #162E52;
+  --color-navy-border: #1F3E6D;
+  --color-electric: #2786E8;
+  --color-electric-hover: #3B95F2;
+  --color-cool-white: #E5EDF7;
+  --color-cool-muted: #9BB3D1;
+  --color-cool-faint: #6382A6;
+  --color-amber-accent: #F0AD4E;
+}
+
+/* Custom focus and smooth scroll behaviors */
+html {
+  color-scheme: dark;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-electric);
+  outline-offset: 2px;
+}
