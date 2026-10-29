@@ -1,4 +1,4 @@
-﻿import express from 'express';
+import express from 'express';
 import {
   getDashboardSummary,
   getAllReportsForTriage,
@@ -8,8 +8,12 @@ import {
   cancelAlert,
 } from '../controllers/government.controller.js';
 import { requireFields } from '../middleware/validate.js';
+import { authenticate, requireRole } from '../middleware/auth.js';
 
 const router = express.Router();
+
+// All Government Dashboard routes require authenticated ADMIN access
+router.use(authenticate, requireRole('ADMIN'));
 
 router.get('/summary', getDashboardSummary);
 router.get('/reports', getAllReportsForTriage);

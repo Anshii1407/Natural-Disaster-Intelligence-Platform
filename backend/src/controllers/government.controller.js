@@ -1,4 +1,4 @@
-﻿import GovernmentAlert from '../models/GovernmentAlert.js';
+import GovernmentAlert from '../models/GovernmentAlert.js';
 import CitizenReport from '../models/CitizenReport.js';
 import RiskAssessment from '../models/RiskAssessment.js';
 import { getDatabaseStatus } from '../config/db.js';
@@ -93,12 +93,16 @@ export const updateReportStatus = async (req, res, next) => {
       });
     }
 
+    const officialIdentifier = req.user?.name
+      ? `${req.user.name} (${req.user.email})`
+      : req.user?.email || verifiedBy || 'Government Authority Officer';
+
     const report = await CitizenReport.findByIdAndUpdate(
       req.params.id,
       {
         status,
         verifiedAt: new Date(),
-        verifiedBy: verifiedBy || 'Government Authority Officer',
+        verifiedBy: officialIdentifier,
       },
       { new: true, runValidators: true }
     );
@@ -131,6 +135,10 @@ export const createAlert = async (req, res, next) => {
 
     const { title, description, disasterType, severity, affectedArea, actionDirectives, expiresAt, issuedBy } = req.body;
 
+    const issuer = req.user?.name
+      ? `${req.user.name} (NDIP Authority)`
+      : issuedBy || 'National Disaster Management Authority';
+
     const newAlert = await GovernmentAlert.create({
       title,
       description,
@@ -139,7 +147,7 @@ export const createAlert = async (req, res, next) => {
       affectedArea,
       actionDirectives: actionDirectives || [],
       expiresAt,
-      issuedBy: issuedBy || 'National Disaster Management Authority',
+      issuedBy: issuer,
       status: 'active',
     });
 

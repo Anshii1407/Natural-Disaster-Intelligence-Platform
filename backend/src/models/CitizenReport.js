@@ -1,4 +1,4 @@
-﻿import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const citizenReportSchema = new mongoose.Schema(
   {
@@ -52,6 +52,12 @@ const citizenReportSchema = new mongoose.Schema(
       type: String,
       enum: ['low', 'medium', 'high', 'critical'],
       default: 'medium',
+    },
+    reportedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+      index: true,
     },
     verifiedAt: {
       type: Date,

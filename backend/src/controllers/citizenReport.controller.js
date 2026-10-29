@@ -1,4 +1,4 @@
-﻿import CitizenReport from '../models/CitizenReport.js';
+import CitizenReport from '../models/CitizenReport.js';
 import { getDatabaseStatus } from '../config/db.js';
 import { validateCoordinates } from '../middleware/validate.js';
 
@@ -34,6 +34,7 @@ export const createReport = async (req, res, next) => {
       description,
       mediaUrl: mediaUrl || null,
       severitySelfReported: severitySelfReported || 'medium',
+      reportedBy: req.user ? (req.user._id || req.user.id) : null,
       status: 'pending',
     });
 
